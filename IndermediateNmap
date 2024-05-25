@@ -1,0 +1,113 @@
+
+This VM 10.10.174.88 is listening on a high port, and if you connect to it it may give you some information you can use to connect to a lower port commonly used for remote access!
+
+
+
+1. Firstly I tried to get the OS of the Target and run a service scan alongside
+	command: nmap -sV -O IP
+			Starting Nmap 7.60 ( https://nmap.org ) at 2024-05-25 11:38 BST
+			Nmap scan report for ip-10-10-174-88.eu-west-1.compute.internal (10.10.174.88)
+			Host is up (0.00031s latency).
+			Not shown: 997 closed ports
+			PORT      STATE SERVICE
+			22/tcp    open  ssh
+			2222/tcp  open  EtherNetIP-1
+			31337/tcp open  Elite
+			MAC Address: 02:AD:07:B7:2E:09 (Unknown)
+			No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+			TCP/IP fingerprint:
+			OS:SCAN(V=7.60%E=4%D=5/25%OT=22%CT=1%CU=31427%PV=Y%DS=1%DC=D%G=Y%M=02AD07%T
+			OS:M=6651BFCD%P=x86_64-pc-linux-gnu)SEQ(SP=103%GCD=1%ISR=10F%TI=Z%CI=Z%TS=A
+			OS:)SEQ(SP=103%GCD=1%ISR=10F%TI=Z%CI=Z%II=I%TS=A)OPS(O1=M5B4ST11NW7%O2=M5B4
+			OS:ST11NW7%O3=M5B4NNT11NW7%O4=M5B4ST11NW7%O5=M5B4ST11NW7%O6=M5B4ST11)WIN(W1
+			OS:=FE88%W2=FE88%W3=FE88%W4=FE88%W5=FE88%W6=FE88)ECN(R=Y%DF=Y%T=3F%W=FAF0%O
+			OS:=M5B4NNSNW7%CC=Y%Q=)T1(R=Y%DF=Y%T=3F%S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N
+			OS:)T4(R=Y%DF=Y%T=3F%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=
+			OS:S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF
+			OS:=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=
+			OS:G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=S)
+			
+			Network Distance: 1 hop
+			
+			OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+			Nmap done: 1 IP address (1 host up) scanned in 15.17 seconds
+	From this we don't get any specific output on OS but we get THREE open ports
+
+
+
+2. Then according to the hint given in Question i tried to run an Aggresive scan on the highest running port hope to get some info to connect to a lower port
+	command: nmap -A -p31337 IP
+
+			Starting Nmap 7.60 ( https://nmap.org ) at 2024-05-25 11:46 BST
+			Nmap scan report for ip-10-10-174-88.eu-west-1.compute.internal (10.10.174.88)
+			Host is up (0.00026s latency).
+			PORT      STATE SERVICE VERSION
+			31337/tcp open  Elite?
+			| fingerprint-strings: 
+			|   DNSStatusRequest, DNSVersionBindReq, FourOhFourRequest, GenericLines, GetRequest, HTTPOptions, Help, Kerberos, LANDesk-RC, LDAPBindReq, LDAPSearchReq, LPDString, NCP, NULL, NotesRPC, RPCCheck, RTSPRequests,
+	
+			|     In case I forget - user:pass
+			|_    ubuntu:Dafdas!!/str0ng
+	
+			1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+			SF-Port31337-TCP:V=7.60%I=7%D=5/25%Time=6651C19D%P=x86_64-pc-linux-gnu%r(N
+			SF:ULL,35,"In\x20case\x20I\x20forget\x20-\x20user:pass\nubuntu:Dafdas!!/st
+			SF:r0ng\n\n")%r(GetRequest,35,"In\x20case\x20I\x20forget\x20-\x20user:pass
+			SF:\nubuntu:Dafdas!!/str0ng\n\n")%r(SIPOptions,35,"In\x20case\x20I\x20forg
+			SF:et\x20-\x20user:pass\nubuntu:Dafdas!!/str0ng\n\n")%r(GenericLines,35,"I
+			SF:n\x20case\x20I\x20forget\x20-\x20user:pass\nubuntu:Dafdas!!/str0ng\n\n"
+			SF:)%r(HTTPOptions,35,"In\x20case\x20I\x20forget\x20-\x20user:pass\nubuntu
+			SF::Dafdas!!/str0ng\n\n")%r(RTSPRequest,35,"In\x20case\x20I\x20forget\x20-
+			SF:\x20user:pass\nubuntu:Dafdas!!/str0ng\n\n")%r(RPCCheck,35,"In\x20case\x
+			SF:20I\x20forget\x20-\x20user:pass\nubuntu:Dafdas!!/str0ng\n\n")%r(DNSVers
+			SF:ionBindReq,35,"In\x20case\x20I\x20forget\x20-\x20user:pass\nubuntu:Dafd
+			SF:as!!/str0ng\n\n")%r(DNSStatusRequest,35,"In\x20case\x20I\x20forget\x20-
+			SF:\x20user:pass\nubuntu:Dafdas!!/str0ng\n\n")%r(Help,35,"In\x20case\x20I\
+			SF:x20forget\x20-\x20user:pass\nubuntu:Dafdas!!/str0ng\n\n")%r(SSLSessionR
+			:eq,35,"In\x20case\x20I\x20forget\x20-\x20user:pass\nubuntu:Dafdas!!/str
+			SF:0ng\n\n")%r(TLSSessionReq,35,"In\x20case\x20I\x20forget\x20-\x20user:pa
+			SF:ss\nubuntu:Dafdas!!/str0ng\n\n")%r(Kerberos,35,"In\x20case\x20I\x20forg
+			SF:et\x20-\x20user:pass\nubuntu:Dafdas!!/str0ng\n\n")%r(SMBProgNeg,35,"In\
+			SF:x20case\x20I\x20forget\x20-\x20user:pass\nubuntu:Dafdas!!/str0ng\n\n")%
+			SF:r(X11Probe,35,"In\x20case\x20I\x20forget\x20-\x20user:pass\nubuntu:Dafd
+			SF:as!!/str0ng\n\n")%r(FourOhFourRequest,35,"In\x20case\x20I\x20forget\x20
+			SF:-\x20user:pass\nubuntu:Dafdas!!/str0ng\n\n")%r(LPDString,35,"In\x20case
+			SF:\x20I\x20forget\x20-\x20user:pass\nubuntu:Dafdas!!/str0ng\n\n")%r(LDAPS
+			SF:earchReq,35,"In\x20case\x20I\x20forget\x20-\x20user:pass\nubuntu:Dafdas
+			SF:!!/str0ng\n\n")%r(LDAPBindReq,35,"In\x20case\x20I\x20forget\x20-\x20use
+			SF:r:pass\nubuntu:Dafdas!!/str0ng\n\n")%r(LANDesk-RC,35,"In\x20case\x20I\x
+			SF:20forget\x20-\x20user:pass\nubuntu:Dafdas!!/str0ng\n\n")%r(TerminalServ
+			SF:er,35,"In\x20case\x20I\x20forget\x20-\x20user:pass\nubuntu:Dafdas!!/str
+			SF:0ng\n\n")%r(NCP,35,"In\x20case\x20I\x20forget\x20-\x20user:pass\nubuntu
+			SF::Dafdas!!/str0ng\n\n")%r(NotesRPC,35,"In\x20case\x20I\x20forget\x20-\x2
+			SF:0user:pass\nubuntu:Dafdas!!/str0ng\n\n");
+			MAC Address: 02:AD:07:B7:2E:09 (Unknown)
+			Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+	
+			Aggressive OS guesses: LINUX 2.6.32 (96%), Linux 3.2 - 4.8 (96%), Linux 2.6.32 - 3.10 (96%), Linux 3.4 - 3.10 (95%), Linux 3.1 (95%), Linux 3.2 (95%), AXIS 210A or 211 Network Camera (Linux 2.6.17) (94%)
+	
+			No exact OS matches for host (test conditions non-ideal).
+			Network Distance: 1 hop
+			TRACEROUTE
+			HOP RTT     ADDRESS
+			1   0.26 ms ip-10-10-174-88.eu-west-1.compute.internal (10.10.174.88)
+			OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+			Nmap done: 1 IP address (1 host up) scanned in 5.96 seconds
+
+		From the above scan we get a more brief info that the running OS is a Linux version 2.6 or 3.2 and WE GET A NOTE that has username and password for something 
+
+3. Now from the username and pass word we get try to connect in the ssh ports one is 2222 and second is 22.
+	command: ssh username@ip -p2222
+			but port 2222 refused connection and is not open for any ssh connection 
+
+			ssh ubuntu@10.10.174.88 -p22
+			say yes when promted and then enter the pass we get in the previous scan 
+
+4. You will get a shell now you have to find the Flag it will be genrally in a file named flag
+	command: find / -type f -iname flag*
+		you will get a file at /home/user/flag.txt
+
+5. Read the file to get the flag
+	command: cat /home/user/flag.txt
+		you will get the flag
+		flag{251..............}
