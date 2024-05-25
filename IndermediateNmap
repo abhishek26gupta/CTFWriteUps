@@ -47,7 +47,7 @@ This VM 10.10.174.88 is listening on a high port, and if you connect to it it ma
 			|   DNSStatusRequest, DNSVersionBindReq, FourOhFourRequest, GenericLines, GetRequest, HTTPOptions, Help, Kerberos, LANDesk-RC, LDAPBindReq, LDAPSearchReq, LPDString, NCP, NULL, NotesRPC, RPCCheck, RTSPRequests,
 	
 			|     In case I forget - user:pass
-			|_    ubuntu:Dafdas!!/str0ng
+			|_    ub****:*********
 	
 			1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
 			SF-Port31337-TCP:V=7.60%I=7%D=5/25%Time=6651C19D%P=x86_64-pc-linux-gnu%r(N
