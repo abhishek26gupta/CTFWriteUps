@@ -1,3 +1,4 @@
+https://medium.com/@abhishek-ji/tryhackme-writeup-intermediatenmap-2ed18b74f72f
 
 This VM 10.10.174.88 is listening on a high port, and if you connect to it it may give you some information you can use to connect to a lower port commonly used for remote access!
 
