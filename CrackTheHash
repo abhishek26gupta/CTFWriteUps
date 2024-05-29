@@ -1,0 +1,94 @@
+https://medium.com/@abhishek-ji/tryhackme-crackthehash-writeup-7dc7f2bf0ba0
+
+Can you complete the level 1 tasks by cracking the hashes?
+
+Tools You Can use
+hash-identifier (Pre-installed With Kali Linux)
+hashcat (Pre-installed With Kali Linux)
+crackstation.net
+dcode.fr
+tunnelsup.com
+48bb6e862e54f2a795ffc4e541caed4d
+Identifying this cipher was super easy i just paste it in an online cipher analyzer tool and got that it is a MD5 hash so i decrypt it with the same site
+
+site : https://www.dcode.fr/cipher-identifier
+
+I found a very useful site which identifies and crack the hash at the same time very quickly crackstation.net i solved all the cipher of level 1 from this site.
+2. CBFDAC6008F9CAB4083784CBD1874F76618D2A97
+
+SHA-1
+
+3.1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032
+
+SHA-256
+
+5. 279412f945939ba78ce0758d3fd83daa
+
+MD4
+
+4.$2y$12$Dwt1BZj6pcyc3Dy1FWZ5ieeUznr71EeNkJkUlypTsgbX1H68wsRom
+
+I was unable to solve the 4th hash as it has some code written in front of it $2y$ which identify the type of hash it it you have to read the manual of hashcat tool to get idea of it.
+
+Manual of hashcat: https://hashcat.net/wiki/doku.php?id=example_hashes
+
+You can use an online tool Tunnelsup whenever you get a hash type in front of the actual hash
+
+we found out that it is a bcrypt hash use hashcat -h in the terminal to get list of code for each hash for bcrypt hash the code is 3200
+
+Step 1: store the complete hash in a file name it hash.txt
+Step 2: We will use the rockyou.txt wordlist but our ans has only 4 letter 
+        so we will filer the wordlist
+Step 3: awk 'length($0) == 4' /usr/share/wordlists/rockyou.txt > wl.txt
+        run this command to store all 4 letter password in wl.txt 
+        file(will be automatically created)
+Step 4: hashcat -m 3200 hash.txt wl.txt
+        give it some time it will show you the password
+Level 2
+This task increases the difficulty. All of the answers will be in the classic rock you password list.
+
+You might have to start using hashcat here and not online tools. It might also be handy to look at some example hashes on hashcats page.
+
+F09EDCB1FCEFC6DFB23DC3505A882655FF77375ED8AA2D1C13F640FCCC2D0C85
+
+SHA-256 (cracked with crackstation.net)
+2. 1DFECA0C002AE40B8619ECF94819CC1B
+
+
+NTLM (cracked with crackstation.net)
+3.$6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPMAXi4bJMl9be.cfi3/qxIf.hsGpS41BqMhSrHVXgMpdjS6xeKZAs02.
+
+In the hashcat example page search for $6$ to get the type of hash
+
+
+hashcat example manual page
+Now, store this hash in a new file say hash.txt and filter the rockyou.txt for 6 letter passwords then run hashcat with code 1800
+
+
+you will get the answer.
+
+4. e5d8870e5bdd26602cab8dbe07a942c8669e56d6
+
+salt: tryhackme
+
+This question has a salt in it and it is also not included in the hash like the previous question whose salt was included in the hash itself. So we have to include the salt with the hash to crack it
+
+Step1: Identify the type of hash
+
+
+Its type is SHA-1
+Step 2: From the hint we can see that it is a HMAC-SHA1 hash it has code 160
+
+So our Hash will be e5d8870e5bdd26602cab8dbe07a942c8669e56d6:tryhackme
+
+store it in hash.txt and
+
+filter the wordlist using this command as our answer has 12 letters
+
+$ awk ‘length($0) == 12’ /usr/share/wordlists/rockyou.txt > wl.txt
+
+$ hashcat -m 160 hash.txt wl.txt
+
+we will get our last hash also
+
+Subscribe for more walkthroughs
