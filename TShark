@@ -1,0 +1,37 @@
+
+Visit this link for proper step by step writeUP
+https://medium.com/@abhishek-ji/tshark-tryhackme-walkthrough-8467a463297d
+https://medium.com/@abhishek-ji/tshark-tryhackme-walkthrough-8467a463297d
+https://medium.com/@abhishek-ji/tshark-tryhackme-walkthrough-8467a463297d
+
+Install tshark on linux using
+sudo apt install tshark
+
+2. run this command to read a file
+
+tshark -r dns.cap
+
+3. Run this command to check the no of packets captured in a cap file
+
+tshark -r dns.cap | wc -l
+
+4 . tshark -r dns.cap -Y “dns.qry.type == 1” is used to get A DNS records.
+
+
+Now the main Task start Download the file and save as dns.pcap
+
+tshark -r dns.cap | wc -l : run this command to find no of packets
+tshark -r dns.pcap -Y “dns.flags.response==0” | wc -l : it gives DNS queries only excluding responses
+
+3. tshark -r dns.pcap -Y “dns.flags.response==0” -T fields -e dns.id : search for specific DNS id field
+
+
+4. tshark -r dns.pcap -Y “dns.flags.response==0” -T fields -e dns.qry.name | awk ‘{print substr($0, 1, 1)}’ | tr -d ‘\n’ : removing new lines and taking only 1st letter or the query name as that looks like a string we want for our next question
+
+
+5. I used an online site to get the flag we have to decode the string we get in previous task
+
+dcode.fr/cipher-identifier 
+
+
+
